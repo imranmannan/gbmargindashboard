@@ -6,7 +6,12 @@ from typing import Iterable
 import streamlit as st
 
 # Define your ENTSOE API key
-ENTSOE_API_KEY: str = 'd62efdf1-a73e-499d-a590-bd0be1057b2f'
+try:
+    ENTSOE_API_KEY: str = st.secrets['ENTSOE_API_KEY']
+except: # horrific pwd mgmt ik lol
+    with 'ENTSOE_API_KEY.txt' as file:
+        ENTSOE_API_KEY:str = file.read()
+
 
 # Create an ENTSOE client using your API key
 entsoe_client = EntsoePandasClient(api_key=ENTSOE_API_KEY)
