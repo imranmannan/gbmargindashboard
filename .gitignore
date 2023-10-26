@@ -163,3 +163,4 @@ ENTSOE_API_KEY.txt
 *.ipynb
 test.py
 ToDo.txt
+.streamlit/
