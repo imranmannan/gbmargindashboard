@@ -5,6 +5,8 @@ from utilities import get_IC_flows_from_ENTSOE
 import pandas as pd
 import numpy as np
 
+st.write('# Scheduled IC Flows')
+
 # choose date
 event_date_str = st.date_input(
     "Choose Date",
@@ -13,7 +15,6 @@ event_date_str = st.date_input(
     )
 # event_date_str = '2023-09-26'
 
-st.write('# Scheduled IC Flows')
 # get IC flows
 peak_start_str = str(event_date_str) + ' 17:00'
 peak_end_str = str(event_date_str) + ' 18:00' # inclusive, hourly data 

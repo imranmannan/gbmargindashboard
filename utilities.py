@@ -12,11 +12,10 @@ except FileNotFoundError: # horrific pwd mgmt ik lol
     with open('ENTSOE_API_KEY.txt','r') as file:
         ENTSOE_API_KEY:str = file.read()
 
-
 # Create an ENTSOE client using your API key
 entsoe_client = EntsoePandasClient(api_key=ENTSOE_API_KEY)
 
-# Define a function to get IC flows from ENTSOE
+# FUNCS
 @st.cache_data
 def get_IC_flows_from_ENTSOE(
     start_local_dt_str: str,
@@ -87,9 +86,7 @@ def get_IC_flows_from_ENTSOE(
 
     return df
 
-# # Get IC flows data for a specific time range
-# start_time = '2023-10-16 17:00'
-# end_time   = '2023-10-16 18:00'
-# df = get_IC_flows_from_ENTSOE(start_time, end_time)
-# You can now work with the 'df' DataFrame for further analysis or visualization.
-
+@st.cache_data
+def get_demand_forecast_DA_from_elexon():
+    df = pd.read_csv('https://data.elexon.co.uk/bmrs/api/v1/forecast/demand/day-ahead?format=csv')
+    return df
