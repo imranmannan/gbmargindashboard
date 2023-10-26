@@ -31,7 +31,7 @@ fig1.for_each_annotation(lambda a: a.update(text=a.text.replace("time_str=", "")
 st.plotly_chart(fig1)
 
 # plot position per IC
-fig2 = px.bar(df, x='country',y='MW',facet_col='time_str', color='country', barmode='stack', title=f'{event_date_str}: IC Flows per IC during Peak')
+fig2 = px.bar(df.groupby(['time_str','country'], as_index=False)['MW'].sum(), x='country',y='MW',facet_col='time_str', color='country', title=f'{event_date_str}: IC Imports per IC during Peak')
 fig2.for_each_annotation(lambda a: a.update(text=a.text.replace("time_str=", ""))) # can make niceer with regex
 st.plotly_chart(fig2)
 
