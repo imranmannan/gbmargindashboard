@@ -8,7 +8,8 @@ import pandas as pd
 event_date_str = st.date_input(
     "Choose Date",
     key='event_date_str',
-    default=(pd.Timestamp.today() - pd.Timedelta(days=1)).strftime('%y-%m-%d'))
+    value=(pd.Timestamp.today() - pd.Timedelta(days=1)).strftime('%y-%m-%d'),
+    format='%d-%b-%y')
 # event_date_str = '2023-09-26'
 
 st.write('# Scheduled IC Flows')
