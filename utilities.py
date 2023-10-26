@@ -1,6 +1,6 @@
 import pandas as pd
 # from tqdm.notebook import tqdm
-from stqdm import stqdm as tqdm
+# from stqdm import stqdm as tqdm
 from entsoe import EntsoePandasClient
 from typing import Iterable
 import streamlit as st
@@ -8,8 +8,8 @@ import streamlit as st
 # Define your ENTSOE API key
 try:
     ENTSOE_API_KEY: str = st.secrets['ENTSOE_API_KEY']
-except: # horrific pwd mgmt ik lol
-    with 'ENTSOE_API_KEY.txt' as file:
+except FileNotFoundError: # horrific pwd mgmt ik lol
+    with open('ENTSOE_API_KEY.txt','r') as file:
         ENTSOE_API_KEY:str = file.read()
 
 
@@ -21,7 +21,7 @@ entsoe_client = EntsoePandasClient(api_key=ENTSOE_API_KEY)
 def get_IC_flows_from_ENTSOE(
     start_local_dt_str: str,
     end_local_dt_str: str,
-    IC_country_code_list: Iterable[str] = ['FR', 'NL', 'BE', 'NO_2','GB_NIR'],
+    IC_country_code_list: Iterable[str] = ['FR', 'NL', 'BE', 'NO_2','GB_NIR','IE_SEM'],
     dayahead: bool = False
 ):
     """
@@ -45,7 +45,7 @@ def get_IC_flows_from_ENTSOE(
     imports: pd.DataFrame = pd.DataFrame()
 
     # Loop through the specified country codes to fetch import and export data
-    for country in tqdm(IC_country_code_list):
+    for country in IC_country_code_list:
         imports[f"{country}"] = entsoe_client.query_scheduled_exchanges(
             country_code_from=country,
             country_code_to='GB',

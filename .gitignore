@@ -160,3 +160,5 @@ cython_debug/
 #.idea/
 
 ENTSOE_API_KEY.txt
+*.ipynb
+test.py
