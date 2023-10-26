@@ -5,7 +5,10 @@ from utilities import get_IC_flows_from_ENTSOE
 import pandas as pd
 
 # choose date
-event_date_str = st.date_input("Choose Date",key='event_date_str')
+event_date_str = st.date_input(
+    "Choose Date",
+    key='event_date_str',
+    default=(pd.Timestamp.today() - pd.Timedelta(days=1)).strftime('%y-%m-%d'))
 # event_date_str = '2023-09-26'
 
 st.write('# Scheduled IC Flows')
