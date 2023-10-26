@@ -8,7 +8,7 @@ import pandas as pd
 event_date_str = st.date_input(
     "Choose Date",
     key='event_date_str',
-    value=(pd.Timestamp.today() - pd.Timedelta(days=1)).strftime('%y-%m-%d'),
+    value=(pd.Timestamp.today() - pd.Timedelta(days=1)).date,
     )
 # event_date_str = '2023-09-26'
 
